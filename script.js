@@ -79,7 +79,7 @@ const handleSendMessage = async () => {
 
     try {
         const payload = { contents: chatHistory };
-        const apiKey = ""; // API key is provided by the environment
+        const apiKey = "AIzaSyCgy8GzbFzxeA-l0fKlZNRds4NbXnFyEeY"; // API key is provided by the environment
         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
         const response = await fetch(apiUrl, {
