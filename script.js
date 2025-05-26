@@ -19,7 +19,7 @@ const scrollToBottom = () => {
 const addMessageToUI = (sender, text) => {
     if (initialMessage) {
         initialMessage.remove(); // Remove initial message once conversation starts
-        initialMessage = null; // Set to null to prevent re-removal
+        //initialMessage = null; // Set to null to prevent re-removal
     }
 
     const messageDiv = document.createElement('div');
