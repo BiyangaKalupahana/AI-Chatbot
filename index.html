@@ -5,20 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gemini AI Chatbot</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
+    <link rel="stylesheet" href="style.css">
 
 </head>
 <body>
+    <script src="design.js"></script>
     <div class="chat-container">
         <div class="chat-header">
-            Gemini AI Chatbot
+            My AI Chatbot
         </div>
         <div class="chat-messages" id="chat-messages">
             <div class="message bot-message">Hello! How can I help you today?</div>
         </div>
         <div class="loading-indicator hidden" id="loading-indicator">
             <div class="loading-spinner"></div>
-            Thinking...
+            Processing...
         </div>
         <div class="chat-input-area">
             <input type="text" id="chat-input" class="chat-input" placeholder="Type your message...">
