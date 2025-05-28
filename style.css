@@ -1,14 +1,12 @@
-/* style.css */
 
-/* Google Fonts - Inter */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 
-/* Custom styles for the Inter font */
+
 body {
     font-family: 'Inter', sans-serif;
 }
 
-/* Basic animation for loading dots */
+
 .animate-bounce-dots > span {
     animation: bounce 1s infinite;
 }

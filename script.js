@@ -1,25 +1,22 @@
-// script.js
 
-// Get DOM elements
 const messagesContainer = document.getElementById('messages-container');
 const messageInput = document.getElementById('message-input');
 const sendButton = document.getElementById('send-button');
-let initialMessage = document.getElementById('initial-message'); // Use let as it will be removed
+let initialMessage = document.getElementById('initial-message'); 
 
-// Array to store chat history for API calls
+
 let chatHistory = [];
-let isLoading = false; // To prevent multiple API calls while one is in progress
+let isLoading = false; 
 
-// Function to scroll to the bottom of the messages container
+
 const scrollToBottom = () => {
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 };
 
-// Function to add a message to the chat UI
+
 const addMessageToUI = (sender, text) => {
     if (initialMessage) {
-        initialMessage.remove(); // Remove initial message once conversation starts
-        //initialMessage = null; // Set to null to prevent re-removal
+        initialMessage.remove(); 
     }
 
     const messageDiv = document.createElement('div');
@@ -35,10 +32,10 @@ const addMessageToUI = (sender, text) => {
 
     messageDiv.appendChild(messageBubble);
     messagesContainer.appendChild(messageDiv);
-    scrollToBottom(); // Scroll to the new message
+    scrollToBottom(); 
 };
 
-// Function to show/hide loading indicator
+
 const toggleLoadingIndicator = (show) => {
     if (show) {
         const loadingDiv = document.createElement('div');
@@ -61,25 +58,25 @@ const toggleLoadingIndicator = (show) => {
             loadingIndicator.remove();
         }
     }
-    messageInput.disabled = show; // Disable input while loading
-    sendButton.disabled = show;   // Disable button while loading
+    messageInput.disabled = show; 
+    sendButton.disabled = show;   
     isLoading = show;
 };
 
-// Function to handle sending a message
+
 const handleSendMessage = async () => {
     const input = messageInput.value.trim();
-    if (input === '' || isLoading) return; // Don't send empty messages or if loading
+    if (input === '' || isLoading) return; 
 
-    addMessageToUI('user', input); // Add user message to UI
-    chatHistory.push({ role: 'user', parts: [{ text: input }] }); // Add to chat history
-    messageInput.value = ''; // Clear input field
+    addMessageToUI('user', input); 
+    chatHistory.push({ role: 'user', parts: [{ text: input }] }); 
+    messageInput.value = ''; 
 
-    toggleLoadingIndicator(true); // Show loading indicator
+    toggleLoadingIndicator(true); 
 
     try {
         const payload = { contents: chatHistory };
-        const apiKey = "AIzaSyCgy8GzbFzxeA-l0fKlZNRds4NbXnFyEeY"; // API key is provided by the environment
+        const apiKey = "AIzaSyCgy8GzbFzxeA-l0fKlZNRds4NbXnFyEeY"; // API key 
         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
         const response = await fetch(apiUrl, {
@@ -94,8 +91,8 @@ const handleSendMessage = async () => {
             result.candidates[0].content && result.candidates[0].content.parts &&
             result.candidates[0].content.parts.length > 0) {
             const aiResponseText = result.candidates[0].content.parts[0].text;
-            addMessageToUI('ai', aiResponseText); // Add AI response to UI
-            chatHistory.push({ role: 'model', parts: [{ text: aiResponseText }] }); // Add to chat history
+            addMessageToUI('ai', aiResponseText); 
+            chatHistory.push({ role: 'model', parts: [{ text: aiResponseText }] }); 
         } else {
             addMessageToUI('ai', 'Sorry, I could not get a response.');
             console.error('Unexpected API response structure:', result);
@@ -104,11 +101,11 @@ const handleSendMessage = async () => {
         console.error('Error calling Gemini API:', error);
         addMessageToUI('ai', 'An error occurred while fetching the response.');
     } finally {
-        toggleLoadingIndicator(false); // Hide loading indicator
+        toggleLoadingIndicator(false); 
     }
 };
 
-// Event listeners
+
 sendButton.addEventListener('click', handleSendMessage);
 messageInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
@@ -116,7 +113,7 @@ messageInput.addEventListener('keypress', (e) => {
     }
 });
 
-// Initial scroll to ensure the input is visible if the page loads with content
+
 window.onload = () => {
     scrollToBottom();
 };
