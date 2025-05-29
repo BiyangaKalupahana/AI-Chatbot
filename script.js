@@ -29,21 +29,20 @@ const addMessageToUI = (sender, text) => {
     avatarImg.className = 'w-8 h-8 rounded-full object-cover';
 
     const messageBubble = document.createElement('div');
+    // --- MODIFIED LINE FOR USER MESSAGE COLOR ---
     messageBubble.className = `max-w-xs sm:max-w-md lg:max-w-lg p-3 rounded-xl shadow-md ${
         sender === 'user'
-            ? 'bg-indigo-500 text-white rounded-br-none'
+            ? 'bg-blue-200 text-gray-800 rounded-br-none' // Changed from bg-indigo-500 text-white
             : 'bg-gray-200 text-gray-800 rounded-bl-none'
     }`;
+    // ---------------------------------------------
     
-    // --- MODIFIED: Markdown rendering for AI messages ---
-    // If it's an AI message, use marked.parse() to convert Markdown to HTML.
-    // For user messages, just convert newlines to <br> as users typically don't type complex Markdown.
+    // Markdown rendering for AI messages and simple newline for user messages
     if (sender === 'ai') {
         messageBubble.innerHTML = marked.parse(text); 
     } else {
         messageBubble.innerHTML = text.replace(/\n/g, '<br>'); 
     }
-    // ---------------------------------------------------
 
     if (sender === 'user') {
         avatarImg.src = userAvatarUrl;
