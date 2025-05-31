@@ -106,7 +106,7 @@ const handleSendMessage = async () => {
         const payload = { contents: chatHistory };
         // Your API key - CAUTION: Do NOT expose this in a public-facing application.
         // For local development/testing, it's generally okay.
-        const apiKey = "AIzaSyCgy8GzbFzxeA-l0fKlZNRds4NbXnFyEeY"; // <--- INSERT YOUR ACTUAL GEMINI API KEY HERE
+        const apiKey = ""; // <--- INSERT YOUR ACTUAL GEMINI API KEY HERE
         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
         const response = await fetch(apiUrl, {
